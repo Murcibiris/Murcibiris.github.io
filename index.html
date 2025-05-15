@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simulador de Crecimiento Poblacional</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
+  <h1>Simulador de Crecimiento Poblacional</h1>
+  <p class="intro">Explora cómo evoluciona la población con modelos exponenciales y logísticos, usando métodos clásicos o la transformada de Laplace.</p>
+
+  <label for="comparar">¿Deseas comparar ambos modelos?</label>
+  <select id="comparar">
+    <option value="si">Sí</option>
+    <option value="no">No, solo logístico</option>
+  </select>
+
+  <label for="metodo">¿Qué método deseas usar?</label>
+  <select id="metodo">
+    <option value="clasico">Resolución normal</option>
+    <option value="laplace">Transformada de Laplace</option>
+  </select>
+
+  <label for="p0">Población inicial (P₀):</label>
+  <input type="number" id="p0" value="45259614">
+
+  <label for="p1">Población después de cierto tiempo (P₁):</label>
+  <input type="number" id="p1" value="46565429">
+
+  <label for="t">Años entre P₀ y P₁:</label>
+  <input type="number" id="t" value="1">
+
+  <label for="tf">Años desde P₀ hasta el futuro a estimar:</label>
+  <input type="number" id="tf" value="4">
+
+  <label for="kcap">Capacidad de carga (K):</label>
+  <input type="number" id="kcap" value="53000000">
+
+  <label for="preal">Población real estimada (opcional):</label>
+  <input type="number" id="preal" value="52321152">
+
+  <button onclick="compararModelos()">📊 Ejecutar simulación</button>
+
+  <div class="result" id="resultado"></div>
+  <div class="steps" id="pasos"></div>
+
+  <div id="laplaceExplicacion" style="display:none;" class="laplace-info">
+    <h3>📘 ¿Qué significa resolver con transformada de Laplace?</h3>
+    <p>La <strong>transformada de Laplace</strong> es una técnica matemática que permite resolver ecuaciones diferenciales transformándolas al dominio de la variable "s", lo cual facilita su manipulación algebraica. Una vez resuelta, se aplica la transformada inversa para volver al dominio del tiempo.</p>
+    <p>En el contexto de crecimiento poblacional:</p>
+    <ul>
+      <li>Convierte la ecuación diferencial logística o exponencial en una ecuación algebraica más sencilla.</li>
+      <li>Permite encontrar la solución general considerando condiciones iniciales.</li>
+      <li>Es útil para analizar estabilidad y comportamiento a largo plazo.</li>
+    </ul>
+    <p><strong>Ejemplo:</strong><br>
+    Para el modelo logístico: <em>dP/dt = r·P(1 - P/K)</em>, se puede aplicar Laplace para obtener <em>L{P(t)}</em> y resolver en el dominio "s".</p>
+  </div>
+
+  <canvas id="grafico" height="100"></canvas>
+</div>
+<div style="margin-top: 25px; text-align: center; background: #f8f8f8; padding: 15px; border-radius: 6px; border: 1px dashed #ccc;">
+  <a href="PROYECTO_ECUACIONES_CORTE_III.pdf" download style="font-size: 16px; font-weight: bold; text-decoration: none; color: #007acc;">
+    📥 Descargar informe final del proyecto (PDF)
+  </a>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
